@@ -1,12 +1,16 @@
 package com.example.mapapp07;
 
 import android.content.Context;
+import android.content.Intent;
 import android.icu.text.StringSearch;
 import android.location.Address;
 import android.location.Geocoder;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -51,8 +55,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         // Add a marker in Sydney and move the camera
 
         LatLng japan=new LatLng(40.6080361, 140.463806);
-        mMap.addMarker(new MarkerOptions().position(japan).title("正解!!"));
+        mMap.addMarker(new MarkerOptions().position(japan).title("弘前公園で”お宝を発見した!!”"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(japan));
+        LatLng jp=new LatLng(38.5248500, 140.1967508);
+        mMap.addMarker(new MarkerOptions().position(jp).title("ハズレ　見つけられなかった"));
+        LatLng jap=new LatLng(36.65131389, 138.1809972);
+        mMap.addMarker(new MarkerOptions().position(jap).title("ハズレ　見つけられなかった"));
 
         //経度を指定して住所を表示
         String result = getAddress(this, 40, 140);
@@ -83,6 +91,23 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         Log.d("QQEQ",adds.toString());
 
         return adds.get(0).getAdminArea();
+    }
+    public class MainActivity extends AppCompatActivity {
+
+        @Override
+        protected void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_maps);
+
+            Button sendButton = findViewById(R.id.send_button);
+            sendButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getApplication(), SubActivity.class);
+                    startActivity(intent);
+                }
+            });
+        }
     }
 
 

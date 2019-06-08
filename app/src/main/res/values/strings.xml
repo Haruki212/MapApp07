@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">MapApp07</string>
     <string name="title_activity_maps">Map</string>
+    <string name="main">Maps Activity</string>
+    <string name="move">MOVE</string>
+    <string name="sub">Sub Activity</string>
+    <string name="return_sub">RETURN</string>
 </resources>
