@@ -19,6 +19,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.IOException;
@@ -29,7 +30,23 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private GoogleMap mMap;
     private int qnum =0;
-    private  String[] hints={"ヒント1：リンゴが有名","ヒント2：城下町","ヒント3：近くに山"};
+    private  String[] hints={"ヒント1：リンゴが有名","ヒント2：城下町","ヒント3：近くに山",
+            "ヒント4三大アルプスのうちの一つ","ヒント５あ","ヒント6い","ひんと７う","ヒント8　え",
+            " ヒント９　お"
+    };
+    private MarkerOptions[] markerOptions={
+            new MarkerOptions().position(new LatLng(40.6080361, 140.463806)) .title("弘前公園で”伝説のリンゴを発見した!!”"),
+            new MarkerOptions().position(new LatLng(38.5248500, 140.1967508)) .title("ハズレ　見つけられなかった"),
+            new MarkerOptions().position(new LatLng(36.65131389, 138.1809972)) .title("ハズレ　見つけられなかった"),
+            new MarkerOptions().position(new LatLng(36.522329, 137.633286)) .title("飛騨山脈で　伝説のアルプスを発見した!!”"),
+            new MarkerOptions().position(new LatLng(35.786362, 137.803149)) .title("ハズレ　見つけられなかった"),
+            new MarkerOptions().position(new LatLng(40.664320, 140.911979)) .title("ハズレ　見つけられなかった"),
+            new MarkerOptions().position(new LatLng(34.687496, 135.511230)) .title("弘前公園で”お宝を発見した!!”"),
+            new MarkerOptions().position(new LatLng(35.731511, 139.712435)) .title("ハズレ　見つけられなかった"),
+            new MarkerOptions().position(new LatLng(35.645241, 139.748634)) .title("ハズレ　見つけられなかった")
+    };
+    private Marker[]  markers=new Marker[3];
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,9 +63,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                textView2.setText(hints[0 +qnum*3]);
-                textView3.setText(hints[1 +qnum*3]);
-                textView4.setText(hints[2 +qnum*3]);
+                qnum++;
+                textView2.setText(hints[0+(qnum-1)*3]);
+                textView3.setText(hints[1 +(qnum-1)*3]);
+                textView4.setText(hints[2 +(qnum-1)*3]);
+                if (markers[0]!=null) markers[0].remove();
+                if (markers[1]!=null) markers[1].remove();
+                if (markers[2]!=null) markers[2].remove();
+                markers[0]= mMap.addMarker(markerOptions[0+(qnum-1)*3]);
+                markers[1]=   mMap.addMarker(markerOptions[1+(qnum-1)*3]);
+                markers[2]=  mMap.addMarker(markerOptions[2+(qnum-1)*3]);
+                qnum = qnum%3;
+
             }
         });
     }
@@ -70,12 +96,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         // Add a marker in Sydney and move the camera
 
         LatLng japan=new LatLng(40.6080361, 140.463806);
-        mMap.addMarker(new MarkerOptions().position(japan).title("弘前公園で”お宝を発見した!!”"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(japan));
-        LatLng jp=new LatLng(38.5248500, 140.1967508);
-        mMap.addMarker(new MarkerOptions().position(jp).title("ハズレ　見つけられなかった"));
-        LatLng jap=new LatLng(36.65131389, 138.1809972);
-        mMap.addMarker(new MarkerOptions().position(jap).title("ハズレ　見つけられなかった"));
+
 
         //経度を指定して住所を表示
         String result = getAddress(this, 40, 140);
