@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -27,6 +28,8 @@ import java.util.Locale;
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
+    private int qnum =0;
+    private  String[] hints={"ヒント1：リンゴが有名","ヒント2：城下町","ヒント3：近くに山"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +39,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+        final TextView textView2 =findViewById(R.id.textView2);
+        final   TextView textView3 =findViewById(R.id.textView3);
+        final TextView textView4 =findViewById(R.id.textView4);
+        Button button = findViewById(R.id.send_button);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                textView2.setText(hints[0 +qnum*3]);
+                textView3.setText(hints[1 +qnum*3]);
+                textView4.setText(hints[2 +qnum*3]);
+            }
+        });
     }
 
 
