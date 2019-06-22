@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.icu.text.StringSearch;
 import android.location.Address;
 import android.location.Geocoder;
+import android.media.MediaPlayer;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -46,6 +47,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             new MarkerOptions().position(new LatLng(35.645241, 139.748634)) .title("ハズレ　見つけられなかった")
     };
     private Marker[]  markers=new Marker[3];
+    private MediaPlayer mediaPlayerCorrect;
+    private MediaPlayer mediaPlayerWrong;
 
 
     @Override
@@ -56,6 +59,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+        mediaPlayerCorrect=MediaPlayer.create(this,R.raw.quizcorrect);
+        mediaPlayerWrong=MediaPlayer.create(this,R.raw.quizwrong);
         final TextView textView2 =findViewById(R.id.textView2);
         final   TextView textView3 =findViewById(R.id.textView3);
         final TextView textView4 =findViewById(R.id.textView4);
@@ -77,6 +82,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
             }
         });
+
     }
 
 
@@ -112,6 +118,21 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     Toast.makeText(MapsActivity.this, " " + result, Toast.LENGTH_SHORT).show();
                     Log.d("QQEQ", result);
                 }
+            }
+        });
+
+        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                if (marker.getTitle().contains("ハズレ")){
+                    mediaPlayerWrong.seekTo(0);
+                    mediaPlayerWrong.start();
+                }
+                else {
+                    mediaPlayerCorrect.seekTo(0);
+                    mediaPlayerCorrect.start();
+                }
+                return false;
             }
         });
     }
