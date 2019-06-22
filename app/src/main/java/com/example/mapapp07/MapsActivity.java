@@ -31,8 +31,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private GoogleMap mMap;
     private int qnum =0;
     private  String[] hints={"ヒント1：リンゴが有名","ヒント2：城下町","ヒント3：近くに山",
-            "ヒント4三大アルプスのうちの一つ","ヒント５あ","ヒント6い","ひんと７う","ヒント8　え",
-            " ヒント９　お"
+            "ヒント4:三大アルプスのうちの一つ","ヒント５:山脈","ヒント6:長野県","ヒント７:ゲーム会社","ヒント8:モンハン",
+            " ヒント９:大阪府"
     };
     private MarkerOptions[] markerOptions={
             new MarkerOptions().position(new LatLng(40.6080361, 140.463806)) .title("弘前公園で”伝説のリンゴを発見した!!”"),
@@ -41,7 +41,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             new MarkerOptions().position(new LatLng(36.522329, 137.633286)) .title("飛騨山脈で　伝説のアルプスを発見した!!”"),
             new MarkerOptions().position(new LatLng(35.786362, 137.803149)) .title("ハズレ　見つけられなかった"),
             new MarkerOptions().position(new LatLng(40.664320, 140.911979)) .title("ハズレ　見つけられなかった"),
-            new MarkerOptions().position(new LatLng(34.687496, 135.511230)) .title("弘前公園で”お宝を発見した!!”"),
+            new MarkerOptions().position(new LatLng(34.687496, 135.511230)) .title("カプコンで”お宝を発見した!!”"),
             new MarkerOptions().position(new LatLng(35.731511, 139.712435)) .title("ハズレ　見つけられなかった"),
             new MarkerOptions().position(new LatLng(35.645241, 139.748634)) .title("ハズレ　見つけられなかった")
     };
