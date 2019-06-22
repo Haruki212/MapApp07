@@ -108,8 +108,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             @Override
             public void onMapLongClick(LatLng latLng) {
                 String result = getAddress(MapsActivity.this, latLng.latitude, latLng.longitude);
-                Toast.makeText(MapsActivity.this, " " + result, Toast.LENGTH_SHORT).show();
-                Log.d("QQEQ", result);
+                if (result!=null){
+                    Toast.makeText(MapsActivity.this, " " + result, Toast.LENGTH_SHORT).show();
+                    Log.d("QQEQ", result);
+                }
             }
         });
     }
